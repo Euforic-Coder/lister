@@ -34,13 +34,10 @@ bool is_digital(string s){
 
 int main(int argc, char* argv[])
 {
-    // TODO: Add filter/add list
-
-
     // Getopt
     int c;
 
-    while ((c = getopt (argc, argv, "f:o:vmMsSlLdDa:A:")) != -1)
+    while ((c = getopt (argc, argv, "f:o:vmMsSlLdDa:A:")) != -1){
         switch (c)
         {
         case 'f':
@@ -58,43 +55,42 @@ int main(int argc, char* argv[])
             break;
         case 's':
             flag_sort_ascending = true;
+            LOG("Sort ascending flagged");
             break;
         case 'S':
             flag_sort_descending = true;
+            LOG("Sort descending flagged");
             break;
         case 'l':
             flag_length_ascending = true;
+            LOG("Sort by length ascending flagged");
             break;
         case 'L':
             flag_length_descending = true;
+            LOG("Sort by length descending flagged");
             break;
         case 'd':
             flag_digital = true;
+            LOG("Show flagged");
             break;
         case 'D':
             flag_nondigital = true;
+            LOG("Show non-digital flagged");
             break;
         case 'a':
             flag_add = true;
             filter.open(optarg);
+            LOG("Add list flagged");
             break;
         case 'A':
             flag_filter = true;
             filter.open(optarg);
+            LOG("Filter list flagged");
             break;
-        case '?':
-            if (optopt == 'c')
-                fprintf (stderr, "Option -%c requires an argument.\n", optopt);
-            else if (isprint (optopt))
-                fprintf (stderr, "Unknown option `-%c'.\n", optopt);
-            else
-                fprintf (stderr,
-                         "Unknown option character `\\x%x'.\n",
-                         optopt);
-            return 1;
         default:
-            abort ();
+            abort();
         }
+    }
 
     // If no file is given the program will be aborted
     if(!flag_file){
@@ -112,8 +108,10 @@ int main(int argc, char* argv[])
     if(flag_add){
         string buffer;
         while(filter >> buffer){
+            LOG(buffer);
             vec.push_back(buffer);
         }
+        filter.close();
     }
 
     // Filter with a list
@@ -133,6 +131,7 @@ int main(int argc, char* argv[])
             }
         }
         vec = temp;
+        filter.close();
     }
 
     // Sort vector alphabeticaly ascending
