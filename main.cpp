@@ -32,8 +32,32 @@ bool is_digital(string s){
     return false;
 }
 
+
+void help(){
+    HelpMaker help("lister");
+    help.add_usage("lister -f <FILE> -o <FILE> [[OPTIONS] | [-a | -A] <FILE>");
+    help.add_argument("-a", "Define removal file");
+    help.add_argument("-A", "Define additional file");
+    help.add_argument("-d", "Filter non-digital words");
+    help.add_argument("-D", "Filter digital words");
+    help.add_argument("-l", "Sort by character count ascending");
+    help.add_argument("-L", "Sort by character count descending");
+    help.add_argument("-m", "Define minimal character count");
+    help.add_argument("-M", "Define maximal character count");
+    help.add_argument("-s", "Sort alphabetically ascending");
+    help.add_argument("-S", "Sort alphabetically descending");
+    help.add_argument("-v", "Set verbosity");
+    help.add_example("lister -f mylist.txt -o output.txt -m 6 -M 12 -s");
+    help.add_example("lister -f mylist.txt -o output.txt -a filter.txt");
+    help.print();
+}
+
 int main(int argc, char* argv[])
 {
+    if(argc < 2){
+        help();
+    }
+
     // Getopt
     int c;
 
@@ -90,11 +114,6 @@ int main(int argc, char* argv[])
         default:
             abort();
         }
-    }
-
-    // If no file is given the program will be aborted
-    if(!flag_file){
-        error("No file was given", true);
     }
 
     // Create vector from file
