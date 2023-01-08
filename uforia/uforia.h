@@ -6,5 +6,7 @@
 #include "has.h"
 #include "colored.h"
 #include "random.h"
+#include "strings.h"
+#include "helpmaker.h"
 
 #endif // UFORIA_H

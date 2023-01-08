@@ -8,9 +8,11 @@ add_library(from from.h)
 add_library(has has.h)
 add_library(messages messages.h)
 add_library(random random.h)
+add_library(strings strings.h)
+add_library(helpmaker helpmaker.h)
 add_library(uforia uforia.h)
 
-foreach(target IN ITEMS colored from has messages random uforia)
+foreach(target IN ITEMS colored from has messages random strings helpmaker uforia)
 	set_target_properties(${target} PROPERTIES LINKER_LANGUAGE CXX)
 endforeach()
 

@@ -5,6 +5,12 @@ using namespace std;
 
 int main()
 {
+    HelpMaker help("Test");
+    help.add_usage("Example of usage");
+    help.add_argument("-h", "Example of a description");
+    help.add_example("test --help");
+    help.print();
+
     vector<string> vec_s;
     vec_s.push_back("Apple");
     vec_s.push_back("Banana");

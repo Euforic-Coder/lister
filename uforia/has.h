@@ -2,10 +2,12 @@
 #define HAS_H
 
 bool has(std::string s, std::string other){
-    for(unsigned short int i = 0; i < (other.length() - s.length()); ++i){
-        std::string substr = other.substr(i, s.length());
-        if(substr == s){
-            return true;
+    if(s.length() < other.length()){
+        for(unsigned short int i = 0; i < (other.length() - s.length()); ++i){
+            std::string substr = other.substr(i, s.length());
+            if(substr == s){
+                return true;
+            }
         }
     }
     return false;
